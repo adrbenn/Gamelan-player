@@ -1,10 +1,17 @@
+/*
+cellular-automata.scd
+
+Implement cellular automata to create a cluster.
+Require additional pattern from https://github.com/yotamorimoto/sc_ca
+*/
+
 // Run this line to check the serial port devices
 SerialPort.listDevices;
 
 (
 // Define and open the serial port
 // Change the port argument
-//~port = SerialPort("port/To/Be/Opened", baudrate: 9600);
+~port = SerialPort("port/To/Be/Opened", baudrate: 9600);
 
 
 // Function to convert array into formated string
@@ -60,7 +67,7 @@ Routine({
 		("Message: " ++ msg).postln;
 
 		// Send message to serial port
-		//~port.putAll(msg);
+		~port.putAll(msg);
 
 		// Interval duration using exponential distribution between [0.5, 2] seconds
 		t = 0.5.exprand(2);
