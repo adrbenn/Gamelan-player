@@ -76,6 +76,10 @@ void loop() {
         // BENN: change this showParsedData to something else later!
         newData = false;
     }
+
+    // Test
+    //playNote(0, 0);
+    //delay(1000);
 }
 
 //============

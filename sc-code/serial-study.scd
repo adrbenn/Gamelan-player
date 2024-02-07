@@ -54,7 +54,7 @@ Routine({
 		msg.postln;
 
 		// Send message to serial port
-		~port.put(msg);
+		~port.putAll(msg);
 
 		// 1 second interval
 		1.wait;
