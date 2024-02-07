@@ -4,7 +4,7 @@ SerialPort.listDevices;
 (
 // Define and open the serial port
 // Change the port argument
-~port = SerialPort("port/To/Be/Opened", baudrate: 9600);
+//~port = SerialPort("port/To/Be/Opened", baudrate: 9600);
 
 
 // Function to convert array into formated string
@@ -35,20 +35,20 @@ p = Pca1(x, 110, inf).asStream;
 
 
 // Routine loop.
-// If it is playing, it sends message to serial port every one second
+// If it is playing, it sends message to serial port every time interval
+
 Routine({
 	// Infinite loop to update the value of the brownian walk
 	inf.do({
 		var a_, b_, c_, msg;
 
 		// Call the next value of the CA stream
-		v = p.next.postln;
+		v = p.next;
 
 		// Spread the array into three
 		a = v[0..7];
 		b = v[8..15];
 		c = v[16..23];
-
 
 		// Convert the array into strings
 		a_ = f.value(a);
@@ -57,13 +57,16 @@ Routine({
 
 		// Concatenate all strings
 		msg = "<" ++ a_ ++ "," ++ b_ ++ "," ++ c_ ++ ">";
-		msg.postln;
+		("Message: " ++ msg).postln;
 
 		// Send message to serial port
-		~port.putAll(msg);
+		//~port.putAll(msg);
 
-		// 1 second interval
-		1.wait;
+		// Interval duration using exponential distribution between [0.5, 2] seconds
+		t = 0.5.exprand(2);
+		("Duration: " ++ t).postln;
+		"".postln;
+		t.wait;
 	});
 }).play;
 )
