@@ -1,10 +1,13 @@
 // Run this line to check the serial port devices
 SerialPort.listDevices;
 
+// Run this line to reset the serial port connection
+SerialPort.closeAll;
+
 (
 // Define and open the serial port
 // Change the port argument
-~port = SerialPort("port/To/Be/Opened", baudrate: 9600);
+~port = SerialPort("COM7", baudrate: 9600);
 
 
 // Function to convert array into formated string
@@ -51,13 +54,16 @@ Routine({
 
 		// Concatenate all strings
 		msg = "<" ++ a_ ++ "," ++ b_ ++ "," ++ c_ ++ ">";
+
+		// BENN added the following line for testing
+		//msg = "<00001000,00000000,00000000>";
 		msg.postln;
 
 		// Send message to serial port
 		~port.putAll(msg);
 
 		// 1 second interval
-		1.wait;
+		0.100.wait;
 	});
 }).play;
 )
