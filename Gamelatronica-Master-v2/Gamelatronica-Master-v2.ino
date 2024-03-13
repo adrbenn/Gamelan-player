@@ -73,12 +73,13 @@ void loop() {
             // because strtok() used in parseData() replaces the commas with \0
         parseData();
         showParsedData();
-        // BENN: change this showParsedData to something else later!
+        sendToInstruments();
+        
         newData = false;
     }
 
     // Test
-    //playNote(0, 0);
+    //playNote(1, 7);
     //delay(1000);
 }
 
@@ -151,51 +152,130 @@ void showParsedData() {
     Serial.println(messageFromPC2);
     Serial.print("Message3 ");
     Serial.println(messageFromPC3);
+}
 
-    // this works for playing 1 note at a time
-    //playNote(0, atoi(messageFromPC1));
-
-    // play multiple notes?
-    int notes = 0;
+void sendToInstruments() {
+    // INSTRUMENT 0 = messageFromPC1
+    int notes0 = 0;
     int ascii_trickery = 0; // idk why this is needed, but it is
 
     for(int i = 0; i < 8; i++){
       ascii_trickery = int(messageFromPC1[i] - '0');
       switch(i){
         case 0:
-          notes = notes + ascii_trickery*128;
+          notes0 = notes0 + ascii_trickery*128;
           break;
         case 1:
-          notes = notes + ascii_trickery*64;
+          notes0 = notes0 + ascii_trickery*64;
           break;
         case 2:
-          notes = notes + ascii_trickery*32;
+          notes0 = notes0 + ascii_trickery*32;
           break;
         case 3:
-          notes = notes + ascii_trickery*16;
+          notes0 = notes0 + ascii_trickery*16;
           break;
         case 4:
-          notes = notes + ascii_trickery*8;
+          notes0 = notes0 + ascii_trickery*8;
           break;
         case 5:
-          notes = notes + ascii_trickery*4;
+          notes0 = notes0 + ascii_trickery*4;
           break;
         case 6:
-          notes = notes + ascii_trickery*2;
+          notes0 = notes0 + ascii_trickery*2;
           break;
         case 7:
-          notes = notes + ascii_trickery*1;
+          notes0 = notes0 + ascii_trickery*1;
           break;
       }
     }
-    Serial.println(notes);
-    
-    sendMotorShieldCommand(0, notes);
-    delay(100);
-    sendMotorShieldCommand(0, 0); // De-energize all channels
-    delay(1000);
-}
+    Serial.println(notes0);
 
+    // INSTRUMENT 1 = messageFromPC2
+    int notes1 = 0;
+    ascii_trickery = 0; // idk why this is needed, but it is
+
+    for(int j = 0; j < 8; j++){
+      ascii_trickery = int(messageFromPC2[j] - '0');
+      switch(j){
+        case 0:
+          notes1 = notes1 + ascii_trickery*128;
+          break;
+        case 1:
+          notes1 = notes1 + ascii_trickery*64;
+          break;
+        case 2:
+          notes1 = notes1 + ascii_trickery*32;
+          break;
+        case 3:
+          notes1 = notes1 + ascii_trickery*16;
+          break;
+        case 4:
+          notes1 = notes1 + ascii_trickery*8;
+          break;
+        case 5:
+          notes1 = notes1 + ascii_trickery*4;
+          break;
+        case 6:
+          notes1 = notes1 + ascii_trickery*2;
+          break;
+        case 7:
+          notes1 = notes1 + ascii_trickery*1;
+          break;
+      }
+    }
+    Serial.println(notes1);
+
+    // INSTRUMENT 2 = messageFromPC3
+    int notes2 = 0;
+    ascii_trickery = 0; // idk why this is needed, but it is
+
+    for(int k = 0; k < 8; k++){
+      ascii_trickery = int(messageFromPC3[k] - '0');
+      switch(j){
+        case 0:
+          notes2 = notes2 + ascii_trickery*128;
+          break;
+        case 1:
+          notes2 = notes2 + ascii_trickery*64;
+          break;
+        case 2:
+          notes2 = notes2 + ascii_trickery*32;
+          break;
+        case 3:
+          notes2 = notes2 + ascii_trickery*16;
+          break;
+        case 4:
+          notes2 = notes2 + ascii_trickery*8;
+          break;
+        case 5:
+          notes2 = notes2 + ascii_trickery*4;
+          break;
+        case 6:
+          notes2 = notes2 + ascii_trickery*2;
+          break;
+        case 7:
+          notes2 = notes2 + ascii_trickery*1;
+          break;
+      }
+    }
+    Serial.println(notes2);
+    
+
+    // SEND THE COMMAND
+    sendMotorShieldCommand(0, notes0);
+    delay(10);
+    sendMotorShieldCommand(1, notes1);
+    delay(10);
+    sendMotorShieldCommand(2, notes2);
+    delay(10);
+    // De-energize all channels
+    sendMotorShieldCommand(0, 0);
+    delay(25);
+    sendMotorShieldCommand(1, 0);
+    delay(25);
+    sendMotorShieldCommand(2, 0);
+    delay(25);
+}
 
 // ****************************************************************************
 // Functions to deal with L293D master-slave communication

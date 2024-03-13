@@ -15,61 +15,91 @@ Routine({
 	inf.do({
 		var msg;
 
+		// SINGLES
+
 		msg = "<10000000,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
+		0.500.wait;
 
-		// interval
-		0.250.wait;
-
-		/*msg = "<01000000,00000000,00000000>";
+		msg = "<01000000,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
-
-		// interval
 		0.500.wait;
 
 		msg = "<00100000,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
-
-		// interval
 		0.500.wait;
 
 		msg = "<00010000,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
-
-		// interval
 		0.500.wait;
 
 		msg = "<00001000,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
-
-		// interval
 		0.500.wait;
 
 		msg = "<00000100,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
-
-		// interval
 		0.500.wait;
 
 		msg = "<00000010,00000000,00000000>";
 		msg.postln;
 		~port.putAll(msg);
+		0.500.wait;
 
-		// interval
-		0.500.wait;*/
+		msg = "<00000001,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
 
-		//msg = "<00000001,00000000,00000000>";
-		//msg.postln;
-		//~port.putAll(msg);
+		// DOUBLES
 
-		// interval
-		//0.200.wait;
+		msg = "<11000000,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<00110000,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<00001100,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<00000011,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		// TRIPLES + QUADS
+
+		msg = "<11100000,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<00011100,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<11100010,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
+
+		msg = "<00011101,00000000,00000000>";
+		msg.postln;
+		~port.putAll(msg);
+		0.500.wait;
 	});
 }).play;
 )

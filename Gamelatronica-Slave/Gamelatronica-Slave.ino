@@ -74,7 +74,7 @@
 // The Address of the Slave is defined here.  This is used for the
 //    Master to identify the correct Slave to control
 // See: https://buildmusic.net/assembly/electronics/
-#define DEVICE_ADDRESS	0
+#define DEVICE_ADDRESS	1
 // *********************************************************************************
 
 
