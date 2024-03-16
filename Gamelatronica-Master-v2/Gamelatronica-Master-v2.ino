@@ -56,8 +56,15 @@ char messageFromPC3[numChars] = {0};
 boolean newData = false;
 
 //============
+// The following part is for microphone level
+//============
+
+int microphonePin = A5;
+
+//============
 
 void setup() {
+    pinMode(microphonePin, INPUT);
     swSerial.begin(57600);
     Serial.begin(9600);
     Serial.println("Ready");
@@ -78,9 +85,23 @@ void loop() {
         newData = false;
     }
 
+    soundLevelDetection();
+
     // Test
     //playNote(1, 7);
     //delay(1000);
+}
+
+//============
+// Functions to deal with microphone
+//============
+void soundLevelDetection(){
+  int micLevel = 0;
+  micLevel = analogRead(microphonePin);
+  // Serial.println(micLevel);
+  
+  // IF ABOVE CERTAIN NUMBER, SEND TO SC?
+
 }
 
 //============
@@ -231,7 +252,7 @@ void sendToInstruments() {
 
     for(int k = 0; k < 8; k++){
       ascii_trickery = int(messageFromPC3[k] - '0');
-      switch(j){
+      switch(k){
         case 0:
           notes2 = notes2 + ascii_trickery*128;
           break;
@@ -263,11 +284,11 @@ void sendToInstruments() {
 
     // SEND THE COMMAND
     sendMotorShieldCommand(0, notes0);
-    delay(10);
+    delay(15);
     sendMotorShieldCommand(1, notes1);
-    delay(10);
+    delay(15);
     sendMotorShieldCommand(2, notes2);
-    delay(10);
+    delay(15);
     // De-energize all channels
     sendMotorShieldCommand(0, 0);
     delay(25);

@@ -63,7 +63,7 @@ Routine({
 		~port.putAll(msg);
 
 		// 1 second interval
-		0.100.wait;
+		0.500.wait;
 	});
 }).play;
 )
