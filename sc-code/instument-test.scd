@@ -3,6 +3,7 @@ SerialPort.listDevices;
 
 // Run this line to reset the serial port connection
 SerialPort.closeAll;
+~port = SerialPort("COM7", baudrate: 9600);
 
 (
 // Define and open the serial port
@@ -63,7 +64,7 @@ Routine({
 		msg.postln;	~port.putAll(msg);
 		0.500.wait;
 
-		msg = "<00010000,00000000,00000000>";
+		msg = "<00000000,00010000,00000000>";
 		msg.postln;	~port.putAll(msg);
 		0.500.wait;
 
@@ -97,7 +98,7 @@ Routine({
 		msg.postln;	~port.putAll(msg);
 		0.500.wait;
 
-		msg = "<00000000,00010000,00000000>";
+		msg = "<00000000,00000000,00010000>";
 		msg.postln;	~port.putAll(msg);
 		0.500.wait;
 

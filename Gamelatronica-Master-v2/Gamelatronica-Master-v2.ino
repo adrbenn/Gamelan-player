@@ -79,7 +79,7 @@ void loop() {
             // this temporary copy is necessary to protect the original data
             // because strtok() used in parseData() replaces the commas with \0
         parseData();
-        showParsedData();
+        //showParsedData();
         sendToInstruments();
         
         newData = false;
@@ -209,7 +209,7 @@ void sendToInstruments() {
           break;
       }
     }
-    Serial.println(notes0);
+    //Serial.println(notes0);
 
     // INSTRUMENT 1 = messageFromPC2
     int notes1 = 0;
@@ -244,7 +244,7 @@ void sendToInstruments() {
           break;
       }
     }
-    Serial.println(notes1);
+    //Serial.println(notes1);
 
     // INSTRUMENT 2 = messageFromPC3
     int notes2 = 0;
@@ -279,23 +279,23 @@ void sendToInstruments() {
           break;
       }
     }
-    Serial.println(notes2);
+    //Serial.println(notes2);
     
 
     // SEND THE COMMAND
     sendMotorShieldCommand(0, notes0);
-    delay(15);
+    delay(5);
     sendMotorShieldCommand(1, notes1);
-    delay(15);
+    delay(5);
     sendMotorShieldCommand(2, notes2);
-    delay(15);
+    delay(5);
     // De-energize all channels
     sendMotorShieldCommand(0, 0);
-    delay(25);
+    delay(10);
     sendMotorShieldCommand(1, 0);
-    delay(25);
+    delay(10);
     sendMotorShieldCommand(2, 0);
-    delay(25);
+    delay(15);
 }
 
 // ****************************************************************************
